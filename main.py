@@ -56,7 +56,7 @@ class MainHandler(webapp2.RequestHandler):
                 else:
                     self.set_default_headers()
                     self.send_rating_image(brands.find_rating_for_brand(brand['brand_id']))
-            except brands.BrandNotFound:
+            except (brands.BrandNotFound, urllib2.HTTPError):
                 self.response.write("Not found")
                 self.response.status = 404
         else:

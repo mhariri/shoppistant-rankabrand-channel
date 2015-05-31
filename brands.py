@@ -14,7 +14,7 @@ class BrandNotFound(Exception):
 def find_brand_for_product(name):
     for n, k in brands.iteritems():
         if n.lower() in name.lower():
-            return {"url": BRAND_URL % k,
+            return {"url": str(BRAND_URL % k),
                     "name": n,
                     "brand_id": k}
     raise BrandNotFound()
