@@ -49,9 +49,9 @@ class MainHandler(webapp2.RequestHandler):
         barcode = self.request.params.get("q", None)
         if barcode:
             try:
+                self.set_default_headers()
                 brand = brands.find_brand_for_product(self.resolve_name(barcode))
                 open_details = self.request.params.get("d", None)
-                self.set_default_headers()
                 if open_details:
                     self.redirect(brand['url'])
                 else:
