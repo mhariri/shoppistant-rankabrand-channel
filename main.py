@@ -51,10 +51,10 @@ class MainHandler(webapp2.RequestHandler):
             try:
                 brand = brands.find_brand_for_product(self.resolve_name(barcode))
                 open_details = self.request.params.get("d", None)
+                self.set_default_headers()
                 if open_details:
                     self.redirect(brand['url'])
                 else:
-                    self.set_default_headers()
                     self.send_rating_image(brands.find_rating_for_brand(brand['brand_id']))
             except (brands.BrandNotFound, urllib2.HTTPError):
                 self.response.write("Not found")
